@@ -13,9 +13,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.MockBeans;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -26,10 +23,9 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class HackathonControllerTest {
 
+  @Mock HackathonRepository hackathonRepository;
   @Autowired private ObjectMapper objectMapper;
-//  @MockBean(name = "hackathonRepository")
-  HackathonRepository hackathonRepository;
-   private HackathonService hackathonService;
+  @InjectMocks private HackathonService hackathonService;
 
   private MockMvc mockMvc;
   private Hackathon hackathon;
@@ -37,9 +33,8 @@ public class HackathonControllerTest {
   @Before
   public void setup() {
     hackathon = new Hackathon();
-    hackathonRepository = mock(HackathonRepository.class);
-//    MockitoAnnotations.initMocks(this);
-//    mockMvc = MockMvcBuilders.standaloneSetup(new Main()).build();
+    MockitoAnnotations.initMocks(HackathonRepository.class);
+    mockMvc = MockMvcBuilders.standaloneSetup(new Main()).build();
     hackathonService = new HackathonService(hackathonRepository);
   }
 
