@@ -1,12 +1,25 @@
 package com.osu.hackathonapi.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity(name = "hackathon")
 public class Hackathon {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "start_date")
     private Date startDate;
+
+    @Column(name = "end_date")
     private Date endDate;
+
+    @Column(name = "desc")
     private String desc;
 
     public Hackathon() {}
