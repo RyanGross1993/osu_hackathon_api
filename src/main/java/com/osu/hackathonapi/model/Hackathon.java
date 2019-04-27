@@ -8,7 +8,7 @@ public class Hackathon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private int id;
 
     @Column(name = "name")
     private String name;
@@ -25,7 +25,7 @@ public class Hackathon {
     public Hackathon() {}
 
     // Hackathon constructor does not need the dates as they can be tentative.
-    public Hackathon(String id, String name, String desc) {
+    public Hackathon(int id, String name, String desc) {
         this.id = id;
         this.name = name;
         this.desc = desc;

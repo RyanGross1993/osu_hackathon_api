@@ -10,6 +10,12 @@ public class HackathonService {
 
   @Autowired protected HackathonRepository hackathonRepository;
 
+  public HackathonService() {}
+
+  public HackathonService(HackathonRepository hackathonRepository) {
+    this.hackathonRepository = hackathonRepository;
+  }
+
   // TODO: Add repository.
 
   public void addHackathon(Hackathon hackathon) {}

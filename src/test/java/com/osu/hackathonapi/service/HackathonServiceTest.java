@@ -1,18 +1,28 @@
 package com.osu.hackathonapi.service;
 
+import com.osu.hackathonapi.model.Hackathon;
+import com.osu.hackathonapi.repository.HackathonRepository;
 import org.junit.Before;
 import org.junit.Test;
+import static org.mockito.Mockito.*;
 
 public class HackathonServiceTest {
+
+  private HackathonRepository hackathonRepository;
   private HackathonService hackathonService;
 
   @Before
   public void setup() {
+    hackathonRepository = mock(HackathonRepository.class);
     hackathonService = new HackathonService();
+
+    doNothing().when(hackathonRepository).save(any());
   }
 
   @Test
-  public void addHackathonTest_Success() {}
+  public void addHackathonTest_Success() {
+
+  }
 
   @Test
   public void addHackathonTest_UnavailTime() {}
