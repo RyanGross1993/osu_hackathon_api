@@ -8,7 +8,7 @@ import java.util.Calendar;
 public class TestUtil {
 
   protected static Hackathon createHackathon() {
-    Hackathon hackathon = new Hackathon(1, "Spring Hackathon '19", "Test");
+    Hackathon hackathon = new Hackathon();
     Calendar startTime = Calendar.getInstance();
     Calendar endTime = Calendar.getInstance();
     startTime.set(2019, 5, 1, 8, 00);

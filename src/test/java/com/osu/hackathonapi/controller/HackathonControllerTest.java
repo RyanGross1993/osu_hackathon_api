@@ -40,6 +40,7 @@ public class HackathonControllerTest {
 
   @Test
   public void addHackathonTest_Success() {
+    when(hackathonRepository.save(hackathon)).thenReturn(hackathon);
     when(hackathonRepository.findById(2L)).thenReturn(Optional.of(hackathon));
     Optional<Hackathon> x = hackathonRepository.findById(2L);
   }

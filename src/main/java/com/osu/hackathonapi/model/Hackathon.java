@@ -1,45 +1,20 @@
 package com.osu.hackathonapi.model;
 
-import javax.persistence.*;
+import com.osu.hackathonapi.enums.EventType;
+
+import javax.persistence.Entity;
+import java.io.Serializable;
 import java.util.Date;
 
-@Entity(name = "hackathon")
-public class Hackathon {
+@Entity(name = "HACKATHON")
+public class Hackathon extends Event implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "start_date")
-    private Date startDate;
-
-    @Column(name = "end_date")
-    private Date endDate;
-
-    @Column(name = "desc")
-    private String desc;
-
-    public Hackathon() {}
-
-    // Hackathon constructor does not need the dates as they can be tentative.
-    public Hackathon(int id, String name, String desc) {
-        this.id = id;
-        this.name = name;
-        this.desc = desc;
+    public Hackathon() {
+        super();
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public Hackathon(String name, Date startDate, Date endDate) {
+        super(name, startDate, endDate);
+        setEventType(EventType.HACKATHON);
     }
 }
