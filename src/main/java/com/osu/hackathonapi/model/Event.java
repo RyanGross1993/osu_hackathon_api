@@ -10,27 +10,26 @@ import java.util.Date;
 @MappedSuperclass
 public abstract class Event implements Serializable {
 
-  @Id
-  private String name;
+  @Id private String name;
 
   @Transient private EventType eventType;
 
   // Note: Timezone is in UTC so any officer can add a meeting, and so it can be converted
   // client-side.
   // Todo: Consider adding a user body in the request w/ the timezone specified.
-//  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd HH:mm", timezone = "UTC")
-//  @Temporal(TemporalType.TIMESTAMP)
+  //  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd HH:mm", timezone = "UTC")
+  //  @Temporal(TemporalType.TIMESTAMP)
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-  @Column(name = "START_DATE")
+  @Column(name = "start_date")
   private Date startDate;
 
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-//  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "END_DATE")
+  //  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "end_date")
   private Date endDate;
 
-  @Column(name = "DESC")
-  private String desc;
+  @Column(name = "event_details")
+  private String eventDetails;
 
   public Event() {}
 
@@ -49,7 +48,7 @@ public abstract class Event implements Serializable {
   }
 
   public EventType getEventType() {
-    return eventType;
+    return this.eventType;
   }
 
   public void setEventType(EventType eventType) {
@@ -65,18 +64,18 @@ public abstract class Event implements Serializable {
   }
 
   public Date getEndDate() {
-    return endDate;
+    return this.endDate;
   }
 
   public void setEndDate(Date endDate) {
     this.endDate = endDate;
   }
 
-  public String getDesc() {
-    return desc;
+  public String getEventDetails() {
+    return this.eventDetails;
   }
 
-  public void setDesc(String desc) {
-    this.desc = desc;
+  public void setEventDetails(String details) {
+    this.eventDetails = details;
   }
 }

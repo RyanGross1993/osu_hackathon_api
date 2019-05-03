@@ -9,43 +9,43 @@ import java.io.Serializable;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class EventResponse implements Serializable {
 
-    private ResponseStatus responseStatus;
-    private ResponseMessage responseMessage;
-    private Event event;
+  private ResponseStatus responseStatus;
+  private ResponseMessage responseMessage;
+  private Object response;
 
-    public EventResponse() {}
+  public EventResponse() {}
 
-    public EventResponse(ResponseStatus responseStatus, ResponseMessage responseMessage) {
-        this.responseStatus = responseStatus;
-        this.responseMessage = responseMessage;
-    };
+  public EventResponse(ResponseStatus responseStatus, ResponseMessage responseMessage) {
+    this.responseStatus = responseStatus;
+    this.responseMessage = responseMessage;
+  };
 
-    public EventResponse(ResponseStatus responseStatus, Event event) {
-        this.responseStatus = responseStatus;
-        this.event = event;
-    }
+  public EventResponse(ResponseStatus responseStatus, Object response) {
+    this.responseStatus = responseStatus;
+    this.response = response;
+  }
 
-    public ResponseStatus getResponseStatus() {
-        return responseStatus;
-    }
+  public ResponseStatus getResponseStatus() {
+    return responseStatus;
+  }
 
-    public void setResponseStatus(ResponseStatus responseStatus) {
-        this.responseStatus = responseStatus;
-    }
+  public void setResponseStatus(ResponseStatus responseStatus) {
+    this.responseStatus = responseStatus;
+  }
 
-    public ResponseMessage getResponseMessage() {
-        return responseMessage;
-    }
+  public ResponseMessage getResponseMessage() {
+    return responseMessage;
+  }
 
-    public void setResponseMessage(ResponseMessage responseMessage) {
-        this.responseMessage = responseMessage;
-    }
+  public void setResponseMessage(ResponseMessage responseMessage) {
+    this.responseMessage = responseMessage;
+  }
 
-    public Event getEvent() {
-        return event;
-    }
+  public Object getResponse() {
+    return response;
+  }
 
-    public void setEvent(Event event) {
-        this.event = event;
-    }
+  public void setResponse(Event response) {
+    this.response = response;
+  }
 }

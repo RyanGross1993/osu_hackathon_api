@@ -6,15 +6,15 @@ import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity(name = "HACKATHON")
+@Entity(name = "hackathon")
 public class Hackathon extends Event implements Serializable {
 
-    public Hackathon() {
-        super();
-    }
+  public Hackathon() {
+    super();
+  }
 
-    public Hackathon(String name, Date startDate, Date endDate) {
-        super(name, startDate, endDate);
-        setEventType(EventType.HACKATHON);
-    }
+  public Hackathon(String name, Date startDate, Date endDate) {
+    super(name, startDate, endDate);
+    setEventType(EventType.HACKATHON);
+  }
 }

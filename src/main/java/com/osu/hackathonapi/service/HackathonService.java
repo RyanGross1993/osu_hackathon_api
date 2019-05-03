@@ -5,8 +5,10 @@ import static com.osu.hackathonapi.enums.ResponseStatus.FAILURE;
 
 import com.osu.hackathonapi.enums.ResponseMessage;
 import com.osu.hackathonapi.model.EventResponse;
+import com.osu.hackathonapi.model.EventQueryType;
 import com.osu.hackathonapi.model.Hackathon;
 import com.osu.hackathonapi.repository.HackathonRepository;
+import com.osu.hackathonapi.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,12 +34,12 @@ public class HackathonService {
     List<Hackathon> hackathons =
         hackathonRepository.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqual(
             startDate, endDate);
-    return hackathons.isEmpty();
+    return (!hackathons.isEmpty());
   }
 
   public EventResponse addHackathon(Hackathon hackathon) {
     EventResponse eventResponse;
-    if (!doesHackathonConflict(hackathon)) {
+    if (doesHackathonConflict(hackathon)) {
       eventResponse = new EventResponse(FAILURE, ResponseMessage.HACKATHON_TIME_CONFLICT);
     } else {
       hackathonRepository.save(hackathon);
@@ -64,11 +66,46 @@ public class HackathonService {
     // Delete hackathon
   }
 
-  public List<Hackathon> getUpcomingHackathons() {
-    return null;
+  public EventResponse getHackathons(EventQueryType eventQueryType) {
+    Date currentDate = DateUtil.getCurrentDate();
+    List<Hackathon> hackathons = null;
+
+    EventResponse eventResponse;
+
+    switch (eventQueryType) {
+      case PREVIOUS:
+        hackathons = getPreviousHackathons(currentDate);
+        break;
+      case IN_PROGRESS:
+        hackathons = getCurrentHackathons(currentDate);
+        break;
+      case UPCOMING:
+        hackathons = getUpcomingHackathons(currentDate);
+        break;
+      default:
+        hackathons = getAll();
+        break;
+    }
+    eventResponse = new EventResponse(SUCCESSFUL, hackathons);
+    return eventResponse;
   }
 
-  public List<Hackathon> getPreviousHackathons() {
-    return null;
+  public List<Hackathon> getAll() {
+    return hackathonRepository.getAll();
+  }
+
+  public List<Hackathon> getCurrentHackathons(Date date) {
+    // TODO: Configure custom query for repo.
+    List<Hackathon> currentHackathons = null;
+    return currentHackathons;
+  }
+
+  public List<Hackathon> getUpcomingHackathons(Date date) {
+    List<Hackathon> previousHackathons = hackathonRepository.findAllByStartDateGreaterThan(date);
+    return previousHackathons;
+  }
+
+  public List<Hackathon> getPreviousHackathons(Date date) {
+    return hackathonRepository.findAllByStartDateGreaterThan(date);
   }
 }
