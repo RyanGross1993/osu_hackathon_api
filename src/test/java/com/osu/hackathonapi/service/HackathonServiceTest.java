@@ -4,19 +4,32 @@ import com.osu.hackathonapi.model.Hackathon;
 import com.osu.hackathonapi.repository.HackathonRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+
 import static org.mockito.Mockito.*;
 
 public class HackathonServiceTest {
 
+  @Mock
   private HackathonRepository hackathonRepository;
+
+  @InjectMocks
+  @Spy
   private HackathonService hackathonService;
+
+  private Hackathon hackathon = new Hackathon();
 
   @Before
   public void setup() {
-    hackathonRepository = mock(HackathonRepository.class);
-    hackathonService = new HackathonService();
+    MockitoAnnotations.initMocks(this);
+    when(hackathonRepository.save(any(Hackathon.class))).thenReturn(hackathon);
+//    hackathonRepository = mock(HackathonRepository.class);
+//    hackathonService = new HackathonService();
 
-    doNothing().when(hackathonRepository).save(any());
+//    doNothing().when(hackathonRepository).save(any());
   }
 
   @Test
