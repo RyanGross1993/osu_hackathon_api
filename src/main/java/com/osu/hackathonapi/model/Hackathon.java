@@ -4,7 +4,7 @@ import com.osu.hackathonapi.enums.EventType;
 
 import javax.persistence.Entity;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.OffsetDateTime;
 
 @Entity(name = "hackathon")
 public class Hackathon extends Event implements Serializable {
@@ -13,7 +13,7 @@ public class Hackathon extends Event implements Serializable {
     super();
   }
 
-  public Hackathon(String name, Date startDate, Date endDate) {
+  public Hackathon(String name, OffsetDateTime startDate, OffsetDateTime endDate) {
     super(name, startDate, endDate);
     setEventType(EventType.HACKATHON);
   }

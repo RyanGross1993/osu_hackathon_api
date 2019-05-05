@@ -12,7 +12,7 @@ import com.osu.hackathonapi.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Service
@@ -29,8 +29,8 @@ public class HackathonService {
   // TODO: Add repository.
 
   private boolean doesHackathonConflict(Hackathon hackathon) {
-    Date startDate = hackathon.getStartDate();
-    Date endDate = hackathon.getEndDate();
+    OffsetDateTime startDate = hackathon.getStartDate();
+    OffsetDateTime endDate = hackathon.getEndDate();
     List<Hackathon> hackathons =
         hackathonRepository.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqual(
             startDate, endDate);
@@ -67,7 +67,7 @@ public class HackathonService {
   }
 
   public EventResponse getHackathons(EventQueryType eventQueryType) {
-    Date currentDate = DateUtil.getCurrentDate();
+    OffsetDateTime currentDate = DateUtil.getCurrentDate();
     List<Hackathon> hackathons = null;
 
     EventResponse eventResponse;
@@ -94,18 +94,18 @@ public class HackathonService {
     return hackathonRepository.getAll();
   }
 
-  public List<Hackathon> getCurrentHackathons(Date date) {
+  public List<Hackathon> getCurrentHackathons(OffsetDateTime date) {
     // TODO: Configure custom query for repo.
     List<Hackathon> currentHackathons = null;
     return currentHackathons;
   }
 
-  public List<Hackathon> getUpcomingHackathons(Date date) {
+  public List<Hackathon> getUpcomingHackathons(OffsetDateTime date) {
     List<Hackathon> previousHackathons = hackathonRepository.findAllByStartDateGreaterThan(date);
     return previousHackathons;
   }
 
-  public List<Hackathon> getPreviousHackathons(Date date) {
+  public List<Hackathon> getPreviousHackathons(OffsetDateTime date) {
     return hackathonRepository.findAllByStartDateGreaterThan(date);
   }
 }

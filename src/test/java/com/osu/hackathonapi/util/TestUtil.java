@@ -2,21 +2,16 @@ package com.osu.hackathonapi.util;
 
 import com.osu.hackathonapi.model.Hackathon;
 
-import java.util.Date;
-import java.util.Calendar;
+import java.time.OffsetDateTime;
 
 public class TestUtil {
 
-  protected static Hackathon createHackathon() {
+  protected static Hackathon createHackathon(String startDate, String endDate) {
     Hackathon hackathon = new Hackathon();
-    Calendar startTime = Calendar.getInstance();
-    Calendar endTime = Calendar.getInstance();
-    startTime.set(2019, 5, 1, 8, 00);
-    endTime.set(2019, 5, 2, 11, 59);
-    Date startDate = startTime.getTime();
-    Date endDate = endTime.getTime();
-    hackathon.setStartDate(startDate);
-    hackathon.setEndDate(endDate);
+    OffsetDateTime offsetStartTime = DateUtil.convertToDate(startDate);
+    OffsetDateTime offsetEndTime = DateUtil.convertToDate(endDate);
+    hackathon.setStartDate(offsetStartTime);
+    hackathon.setEndDate(offsetEndTime);
     return hackathon;
   }
 }

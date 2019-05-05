@@ -5,7 +5,7 @@ import com.osu.hackathonapi.enums.EventType;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.OffsetDateTime;
 
 @MappedSuperclass
 public abstract class Event implements Serializable {
@@ -14,26 +14,27 @@ public abstract class Event implements Serializable {
 
   @Transient private EventType eventType;
 
-  // Note: Timezone is in UTC so any officer can add a meeting, and so it can be converted
-  // client-side.
+  // Note: Timezone is in UTC so any officer can add a meeting.
+  // Timestamp will be given via HTTP Request.
+
   // Todo: Consider adding a user body in the request w/ the timezone specified.
   //  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd HH:mm", timezone = "UTC")
   //  @Temporal(TemporalType.TIMESTAMP)
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+//  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   @Column(name = "start_date")
-  private Date startDate;
+  private OffsetDateTime startDate;
 
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+//  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   //  @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "end_date")
-  private Date endDate;
+  private OffsetDateTime endDate;
 
   @Column(name = "event_details")
   private String eventDetails;
 
   public Event() {}
 
-  public Event(String name, Date startDate, Date endDate) {
+  public Event(String name, OffsetDateTime startDate, OffsetDateTime endDate) {
     this.name = name;
     this.startDate = startDate;
     this.endDate = endDate;
@@ -55,19 +56,19 @@ public abstract class Event implements Serializable {
     this.eventType = eventType;
   }
 
-  public Date getStartDate() {
+  public OffsetDateTime getStartDate() {
     return startDate;
   }
 
-  public void setStartDate(Date startDate) {
+  public void setStartDate(OffsetDateTime startDate) {
     this.startDate = startDate;
   }
 
-  public Date getEndDate() {
+  public OffsetDateTime getEndDate() {
     return this.endDate;
   }
 
-  public void setEndDate(Date endDate) {
+  public void setEndDate(OffsetDateTime endDate) {
     this.endDate = endDate;
   }
 
